@@ -14,6 +14,8 @@ public class HibernateUtil {
     static {
         if (sessionFactory == null) {
             try {
+                // If we use config file name other than "hibernate.cfg.xml", we have to pass that
+                // name to -> configure("myConfig.cfg.xml")
                 standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
                 MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
                 Metadata metadata = metadataSources.getMetadataBuilder().build();
