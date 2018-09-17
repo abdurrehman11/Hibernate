@@ -9,37 +9,31 @@ public class FetchDataClientTest {
 
     public static void main(String[] args) {
 
-        //getEmployeeAndAdressByEmployeeId();
+        getEmployeeAndAdressByEmployeeId();
         getEmployeeAndAdressByAddressId();
     }
 
     private static void getEmployeeAndAdressByEmployeeId() {
 
-        Employee employee = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            employee = session.get(Employee.class, 1);
+            Employee employee = session.get(Employee.class, 1);
             System.out.println(employee);
+            Address address = employee.getAddress();
+            System.out.println(address);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if (employee != null) {
-            employee.getAddressList().forEach(System.out::println);
         }
     }
 
     private static void getEmployeeAndAdressByAddressId() {
 
-        Address address = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            address = session.get(Address.class, 1);
+            Address address = session.get(Address.class, 1);
             System.out.println(address);
+            Employee employee = address.getEmployee();
+            System.out.println(employee);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if (address != null) {
-            System.out.println(address.getEmployee());
         }
     }
 

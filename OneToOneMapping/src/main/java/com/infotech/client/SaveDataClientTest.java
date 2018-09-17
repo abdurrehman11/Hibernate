@@ -35,23 +35,17 @@ public class SaveDataClientTest {
         address1.setState("Pakistan");
         address1.setPincode(123456L);
 
-        Address address2 = new Address();
-        address2.setCity("Fsd");
-        address2.setStreet("Model Town");
-        address2.setState("Pakistan");
-        address2.setPincode(123456L);
-
-        employee.getAddressList().add(address1);
-        employee.getAddressList().add(address2);
-
-        address1.setEmployee(employee);
-        address2.setEmployee(employee);
-
+        employee.setAddress(address1);
         return employee;
     }
 
     private static void createEmployee(Session session) {
         session.beginTransaction();
+        // to use save, use CascadeType.ALL
+        // Integer id = (Integer) session.save(getEmployee());
+        // System.out.println("Employee created with id: " +id);
+
+        // in case of CascadeType.PERSIST
         session.persist(getEmployee());
         session.getTransaction().commit();
     }

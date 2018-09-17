@@ -23,9 +23,9 @@ public class Address {
     @Column(name = "pin_code")
     private Long pincode;
 
-    // add employee_id as FK in Address Table
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
+    // Bidirectional Mapping
+    // mappedBy -> tells about the owning entity to avoid extra column creation in Address table
+    @OneToOne(mappedBy = "address")
     private Employee employee;
 
     public Integer getAddressId() {

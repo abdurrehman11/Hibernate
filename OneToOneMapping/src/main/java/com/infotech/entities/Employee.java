@@ -1,12 +1,9 @@
 package com.infotech.entities;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "employee_table")
@@ -30,14 +27,12 @@ public class Employee {
     @Column(name = "salary")
     private Double salary;
 
-    // Only OneToMany Mapping creates a third table which contains PK's of both tables as FK's but there is no need of third table
-    // Third table can be avoided using both OneToMany and ManyToOne Mapping
-
-    // Customized third table
-    // @JoinTable(name = "employee_address_table", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
-    // Default behaviour is LAZY
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
-    private List<Address> addressList = new ArrayList<>();
+    // By Default, OneToOne is EAGER
+    // If we use CascadeType.PERSIST, we have to persist the object (operation depends on CascadeType )
+    // address_id -> FK in Employee table
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -79,12 +74,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public List<Address> getAddressList() {
-        return addressList;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
