@@ -41,11 +41,12 @@ public class SaveDataClientTest {
 
     private static void createEmployee(Session session) {
         session.beginTransaction();
-        // to use save, use CascadeType.ALL
+        // to use save, use CascadeType.ALL which is also a good approach.
         // Integer id = (Integer) session.save(getEmployee());
         // System.out.println("Employee created with id: " +id);
 
         // in case of CascadeType.PERSIST
+        // PERSIST -> reduce code length because you only need to save parent
         session.persist(getEmployee());
         session.getTransaction().commit();
     }
