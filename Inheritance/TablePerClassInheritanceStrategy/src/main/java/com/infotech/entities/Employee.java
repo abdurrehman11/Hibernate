@@ -74,6 +74,6 @@ public class Employee extends Person {
                 ", deptName='" + deptName + '\'' +
                 ", bonus=" + bonus +
                 ", email='" + email + '\'' +
-                '}';
+                '}' + super.toString();
     }
 }

@@ -48,7 +48,7 @@ public class Student extends Person {
                 "schoolName='" + schoolName + '\'' +
                 ", sectionName='" + sectionName + '\'' +
                 ", fee=" + fee +
-                '}';
+                '}' + super.toString();
     }
 
 }
